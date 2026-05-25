@@ -15,7 +15,7 @@ public class Main {
     public static void main(String[] args) {
         Organization org = new Organization("PT JDT 17 MAJU SEJAHTERA MANDIRI");
 
-        // Data Dummy (Bypass validasi scanner) - Membuktikan Head HRD > 55 disuruh pensiun
+
         org.addEmployee(new HeadHRD("Slamet Riyadi", 58, new BigDecimal("35000000")));
         org.addEmployee(new JavaDeveloper("Budi Santoso", 24, "JUNIOR", new BigDecimal("12000000")));
 
@@ -40,19 +40,19 @@ public class Main {
         System.out.print("Masukkan Role/Posisi: ");
         String role = scanner.nextLine();
 
-        // 1. Tentukan Gaji & Level Berdasarkan Umur
+
         String level = "";
         BigDecimal salary = BigDecimal.ZERO;
 
         if (age >= 20 && age <= 25) {
             level = "JUNIOR";
-            salary = new BigDecimal("10000000"); // 10 juta
+            salary = new BigDecimal("10000000");
         } else if (age > 25 && age <= 35) {
             level = "MIDDLE TO SENIOR";
-            salary = new BigDecimal("25000000"); // 25 juta
+            salary = new BigDecimal("25000000");
         }
 
-        // 2. Buat Object Calon Karyawan Dulu (Polymorphism)
+
         Employee newEmployee;
         if (role.equalsIgnoreCase("HEAD HRD")) {
             newEmployee = new HeadHRD(name, age, salary);
@@ -60,17 +60,17 @@ public class Main {
             newEmployee = new JavaDeveloper(name, age, level, salary);
         }
 
-        // 3. Validasi Object Tersebut Menggunakan Reflection
+
         try {
             ReflectionValidator.validate(newEmployee);
 
-            // Jika tidak ada Exception, berarti sukses
+
             System.out.println("\n>>> VALIDASI SUKSES! Karyawan ditambahkan.");
             org.addEmployee(newEmployee);
             org.displayStructure();
 
         } catch (EmployeeValidationException e) {
-            // Jika validasi gagal, object tidak di-add ke Organization (dibuang oleh Garbage Collector)
+
             System.err.println("\n" + e.getMessage());
             System.out.println(">>> PENDAFTARAN DITOLAK.");
         } catch (IllegalAccessException e) {
@@ -78,21 +78,7 @@ public class Main {
         } finally {
             scanner.close();
         }
-//        CompanyStructure company = new CompanyStructure();
 //
-//        Employee emp1 = new Employee("Manuel Pardede", 1);
-//        Employee emp2 = new Employee("Siti Handayani", 30);
-//        Employee emp3 = new Employee("Subarjo Sutedjo", 58);
-//
-//        company.processEmployeeStructure(emp1);
-//        company.processEmployeeStructure(emp2);
-//        company.processEmployeeStructure(emp3);
-//
-//        emp1.displayInfo();
-//        emp2.displayInfo();
-//        emp3.displayInfo();
-
-
         TegalFoodStall stall = new TegalFoodStall();
 
         System.out.println("\t\t\t----------------------------------");

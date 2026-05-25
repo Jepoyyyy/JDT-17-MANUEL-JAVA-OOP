@@ -2,6 +2,7 @@ package org.indivaragroup.inheritance.exam.company;
 
 import org.indivaragroup.inheritance.exam.company.annotation.ValidAge;
 import org.indivaragroup.inheritance.exam.company.annotation.ValidString;
+import org.indivaragroup.inheritance.exam.company.interfacing.Employable;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
@@ -9,7 +10,6 @@ import java.util.Locale;
 
 public abstract class Employee implements Employable {
 
-    // Terapkan Annotation Langsung di Model
     @ValidString(minLength = 5)
     private String name;
 
@@ -19,7 +19,7 @@ public abstract class Employee implements Employable {
     @ValidString
     private String position;
 
-    private BigDecimal salary; // Gaji tidak divalidasi input karena generate otomatis
+    private BigDecimal salary;
 
     public Employee(String name, int age, String position, BigDecimal salary) {
         this.name = name != null ? name.toUpperCase() : "";

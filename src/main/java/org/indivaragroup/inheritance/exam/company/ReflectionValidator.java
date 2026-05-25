@@ -12,7 +12,7 @@ public class ReflectionValidator {
         Class<?> currentClass = obj.getClass();
         String roleValue = "";
 
-        // 1. Cari nilai "position/role" terlebih dahulu untuk validasi spesifik Java Developer
+
         while (currentClass != null && currentClass != Object.class) {
             try {
                 Field roleField = currentClass.getDeclaredField("position");
@@ -20,19 +20,19 @@ public class ReflectionValidator {
                 roleValue = (String) roleField.get(obj);
                 break;
             } catch (NoSuchFieldException e) {
-                currentClass = currentClass.getSuperclass(); // Cari di parent class
+                currentClass = currentClass.getSuperclass();
             }
         }
 
-        // Reset currentClass ke awal untuk validasi seluruh field
+
         currentClass = obj.getClass();
 
-        // 2. Iterasi ke semua class hierarchy (Child hingga Parent)
+
         while (currentClass != null && currentClass != Object.class) {
             for (Field field : currentClass.getDeclaredFields()) {
                 field.setAccessible(true);
 
-                // Validasi @ValidString (Nama minimal 5 char & Role tidak boleh kosong)
+
                 if (field.isAnnotationPresent(ValidString.class)) {
                     ValidString ann = field.getAnnotation(ValidString.class);
                     String value = (String) field.get(obj);
@@ -45,7 +45,7 @@ public class ReflectionValidator {
                     }
                 }
 
-                // Validasi @ValidAge (Batas umur)
+
                 if (field.isAnnotationPresent(ValidAge.class)) {
                     ValidAge ann = field.getAnnotation(ValidAge.class);
                     int age = (int) field.get(obj);
@@ -53,7 +53,7 @@ public class ReflectionValidator {
                     if (age < ann.min()) {
                         throw new EmployeeValidationException("VALIDASI GAGAL: Umur tidak boleh di bawah " + ann.min() + " tahun!");
                     }
-                    // Pengecualian: Jika bukan Head HRD yang sedang di-seed, berlaku batas max 35
+
                     if (age > ann.max() && !roleValue.contains("HEAD HRD")) {
                         throw new EmployeeValidationException("VALIDASI GAGAL: Umur tidak boleh lebih dari " + ann.max() + " tahun!");
                     }
@@ -62,7 +62,7 @@ public class ReflectionValidator {
                     }
                 }
             }
-            currentClass = currentClass.getSuperclass(); // Pindah ke Superclass (Employee)
+            currentClass = currentClass.getSuperclass();
         }
     }
 }
