@@ -1,0 +1,141 @@
+Sebuah platform kursus online ingin membuat sistem sederhana untuk menyimpan nilai peserta dan menentukan status kelulusan.
+
+
+
+Requirement
+
+1. Buat Generic Class
+Buat class:
+Course<T>
+
+
+
+Class memiliki atribut:
+
+
+
+-namaPeserta
+
+-nilai
+
+
+
+Gunakan generic untuk tipe data nilai (T).
+
+
+
+2. Method dalam Class
+
+
+
+Buat method:
+
+
+
+void tampilkanData()
+
+
+
+Untuk menampilkan data peserta.
+
+
+
+3. Logic Penilaian
+
+
+
+Buat pengecekan menggunakan if else:
+
+
+
+Nilai	Keterangan
+
+>= 85	Excellent
+
+>= 70	Good
+
+>= 50	Remedial
+
+< 50	Failed
+
+
+
+REQ:
+
+
+
+meminta input jumlah peserta
+
+menggunakan looping untuk input seluruh data peserta
+
+menampilkan seluruh hasil di akhir
+
+hitung rata-rata nilai
+
+hitung jumlah peserta lulus
+
+tampilkan peserta dengan nilai tertinggi
+
+
+
+Ketentuan Tambahan
+
+Gunakan:
+
+generic class
+
+array atau ArrayList
+
+looping
+
+nested if boleh digunakan
+
+Nilai menggunakan tipe Integer
+
+
+
+
+
+Contoh Output
+
+Masukkan jumlah peserta: 3
+
+
+
+Peserta 1
+
+Nama: Andi
+
+Nilai: 90
+
+
+
+Peserta 2
+
+Nama: Budi
+
+Nilai: 72
+
+
+
+Peserta 3
+
+Nama: Citra
+
+Nilai: 45
+
+
+
+===== HASIL =====
+
+
+Nama Peserta : Andi
+Nilai         : 90
+Status        : Excellent
+Nama Peserta : Budi
+Nilai         : 72
+Status        : Good
+
+Nama Peserta : Citra
+Nilai         : 45
+Status        : Failed
